@@ -1,4 +1,4 @@
-package com.springboot_aws.book.springboot;
+package com.springboot_aws.book.springboot.web;
 
 import com.springboot_aws.book.springboot.web.HelloController;
 import org.junit.Test;
