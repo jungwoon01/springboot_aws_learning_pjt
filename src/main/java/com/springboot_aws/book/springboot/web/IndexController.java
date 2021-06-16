@@ -1,5 +1,6 @@
 package com.springboot_aws.book.springboot.web;
 
+import com.springboot_aws.book.springboot.config.auth.LoginUser;
 import com.springboot_aws.book.springboot.config.auth.dto.SessionUser;
 import com.springboot_aws.book.springboot.service.posts.PostsService;
 import com.springboot_aws.book.springboot.web.dto.PostsResponseDto;
@@ -16,15 +17,12 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         // 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장할 수 있다.
         // 여기서는 posts 라는 이름으로 index.mustache 에 전달한다.
         model.addAttribute("posts", postsService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
